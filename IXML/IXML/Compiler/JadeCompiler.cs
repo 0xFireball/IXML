@@ -1,6 +1,7 @@
 ﻿using KJade.Ast;
 using KJade.Parser;
 using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
@@ -11,9 +12,9 @@ namespace KJade.Compiler
     public abstract class JadeCompiler : IJadeCompiler
     {
         private static readonly string SubstitutionErrorString = "[ERR!]";
-        private static readonly Regex SingleVariableSubstitutionRegex = new Regex(@"(?<Encode>!)?#{model(?:\.(?<ParameterName>[a-zA-Z0-9-_]+))}", RegexOptions.Compiled);
-        private static readonly Regex ConditionalRegex = new Regex(@"@if(?<Not>not)?(?<AllowNonexistent>\?)?\smodel(?:\.(?<ParameterName>[a-zA-Z0-9-_]+)+)?(?<Contents>[\s\S]*?)@endif", RegexOptions.Compiled);
-        private static readonly Regex EnumerableExpansionRegex = new Regex(@"@enumerable\smodel(?:\.(?<ParameterName>[a-zA-Z0-9-_]+)+)?(?<Contents>[\s\S]*?)@endenumerable", RegexOptions.Compiled);
+        private static readonly Regex SingleVariableSubstitutionRegex = new Regex(@"(?<Encode>!)?#{model(?:\.(?<ParameterName>[a-zA-Z0-9-_]+))}");
+        private static readonly Regex ConditionalRegex = new Regex(@"@if(?<Not>not)?(?<AllowNonexistent>\?)?\smodel(?:\.(?<ParameterName>[a-zA-Z0-9-_]+)+)?(?<Contents>[\s\S]*?)@endif");
+        private static readonly Regex EnumerableExpansionRegex = new Regex(@"@enumerable\smodel(?:\.(?<ParameterName>[a-zA-Z0-9-_]+)+)?(?<Contents>[\s\S]*?)@endenumerable");
 
         private static string XmlEncode(string value)
         {
@@ -44,7 +45,7 @@ namespace KJade.Compiler
                 PerformEnumerableExpansionReplacement
             };
             var replacedInput = input;
-            substitutionList.ForEach(subfunc => replacedInput = subfunc(replacedInput, model));
+            substitutionList.Select(subfunc => replacedInput = subfunc(replacedInput, model));
             return replacedInput;
         }
 

@@ -46,7 +46,7 @@ namespace KJade.Compiler
                 return StandardTypePropertyEvaluator(model, propertyName);
             }
 
-            if (typeof(IDictionary<string, object>).IsAssignableFrom(model.GetType()))
+            if (typeof(IDictionary<string, object>).GetTypeInfo().IsAssignableFrom(model.GetType().GetTypeInfo()))
             {
                 return DynamicDictionaryPropertyEvaluator(model, propertyName);
             }
