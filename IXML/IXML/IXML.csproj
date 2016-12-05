@@ -39,8 +39,26 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Ast\JNode.cs" />
+    <Compile Include="Ast\JRootNode.cs" />
+    <Compile Include="Compiler\Html\HtmlCompileResult.cs" />
+    <Compile Include="Compiler\Html\HtmlNode.cs" />
+    <Compile Include="Compiler\Html\JadeHtmlCompiler.cs" />
+    <Compile Include="Compiler\Html\JadeHtmlCompilerOptions.cs" />
+    <Compile Include="Compiler\IJadeCompiler.cs" />
+    <Compile Include="Compiler\IJadeCompileResult.cs" />
+    <Compile Include="Compiler\JadeCompiler.cs" />
+    <Compile Include="Compiler\ModelReflectionUtil.cs" />
+    <Compile Include="Parser\CodePosition.cs" />
+    <Compile Include="Parser\JadeLexer.cs" />
+    <Compile Include="Parser\JadeParser.cs" />
+    <Compile Include="Parser\JadeToken.cs" />
+    <Compile Include="Parser\KJadeParserException.cs" />
+    <Compile Include="Parser\RawToken.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Util\KJadeUtil.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
